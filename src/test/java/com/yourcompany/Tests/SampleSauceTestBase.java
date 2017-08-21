@@ -183,7 +183,7 @@ public class SampleSauceTestBase implements SauceOnDemandSessionIdProvider {
         //Getting the build name.
         //Using the Jenkins ENV var. You can use your own. If it is not set test will run without a build id.
         if (buildTag != null) {
-            capabilities.setCapability("build", buildTag);
+            capabilities.setCapability("build", process.env.SAUCE_BUILD_NAME);
         }
         SauceHelpers.addSauceConnectTunnelId(capabilities);
         this.driver = new RemoteWebDriver(
