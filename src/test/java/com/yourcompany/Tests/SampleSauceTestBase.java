@@ -39,7 +39,7 @@ public class SampleSauceTestBase implements SauceOnDemandSessionIdProvider {
 
     public static String seleniumURI;
 
-    public static String buildTag;
+    public static String buildTag = System.getenv("SAUCE_BUILD_NAME");
     /**
      * Constructs a {@link SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
      * supplied by environment variables or from an external file, use the no-arg {@link SauceOnDemandAuthentication} constructor.
@@ -183,7 +183,7 @@ public class SampleSauceTestBase implements SauceOnDemandSessionIdProvider {
         //Getting the build name.
         //Using the Jenkins ENV var. You can use your own. If it is not set test will run without a build id.
         if (buildTag != null) {
-            capabilities.setCapability("build", "VSTS_build");
+            capabilities.setCapability("build", buildTag);
         }
         SauceHelpers.addSauceConnectTunnelId(capabilities);
         this.driver = new RemoteWebDriver(
